@@ -25,7 +25,7 @@ setup(
         "torchvision",
         "tqdm",
         "transforms3d",
-        "zarr",
+        "zarr<3",
         "pyyaml",
         "notebook",
         "ptable",

@@ -17,7 +17,7 @@ types-pyyaml = "*"
 
 [packages]
 l5kit = {editable = true, path = "."}
-zarr = "*"
+zarr = "<3"
 numpy = "*"
 opencv-contrib-python-headless = "*"
 pymap3d = "*"
