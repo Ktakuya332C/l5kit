@@ -65,14 +65,14 @@ def get_sat_image_crop_scaled(
 
     max_crop_size = [max(crop_size), max(crop_size)]
     crop_size_in_meters = np.array(max_crop_size) * pixel_size
-    crop_size_in_sat_pixels = np.int0(np.round(crop_size_in_meters / sat_pixel_scale))
+    crop_size_in_sat_pixels = np.int64(np.round(crop_size_in_meters / sat_pixel_scale))
 
     sat_crop = get_sat_image_crop(sat_image, crop_size_in_sat_pixels, sat_pixel_translation, yaw)
 
     resized_sat_crop = cv2.resize(sat_crop, tuple(max_crop_size), interpolation=interpolation)
-    start_x = np.int0(resized_sat_crop.shape[0] / 2 - crop_size[1] / 2)
+    start_x = np.int64(resized_sat_crop.shape[0] / 2 - crop_size[1] / 2)
     end_x = start_x + crop_size[1]
-    start_y = np.int0(resized_sat_crop.shape[1] / 2 - crop_size[0] / 2)
+    start_y = np.int64(resized_sat_crop.shape[1] / 2 - crop_size[0] / 2)
     end_y = start_y + crop_size[0]
 
     out_sat_crop = resized_sat_crop[start_x:end_x, start_y:end_y]
@@ -113,9 +113,9 @@ def get_sat_image_crop(
     rotated_cropped = cv2.warpAffine(im, rot_matrix, (im.shape[1], im.shape[0]))
 
     # Center crop
-    start_x = np.int0(rotated_cropped.shape[0] / 2 - crop_size[0] / 2)
+    start_x = np.int64(rotated_cropped.shape[0] / 2 - crop_size[0] / 2)
     end_x = start_x + crop_size[0]
-    start_y = np.int0(rotated_cropped.shape[1] / 2 - crop_size[1] / 2)
+    start_y = np.int64(rotated_cropped.shape[1] / 2 - crop_size[1] / 2)
     end_y = start_y + crop_size[1]
 
     return rotated_cropped[start_x:end_x, start_y:end_y]
@@ -132,9 +132,9 @@ def _get_sat_image_crop_without_rotation(
     assert len(crop_size) >= 2
     assert sat_pixel_translation.shape[0] >= 2
 
-    start_x = np.int0(sat_pixel_translation[0] - crop_size[0] // 2)
+    start_x = np.int64(sat_pixel_translation[0] - crop_size[0] // 2)
     end_x = start_x + crop_size[0]
-    start_y = np.int0(sat_pixel_translation[1] - crop_size[1] // 2)
+    start_y = np.int64(sat_pixel_translation[1] - crop_size[1] // 2)
     end_y = start_y + crop_size[1]
 
     # Crops outside of the image not supported.

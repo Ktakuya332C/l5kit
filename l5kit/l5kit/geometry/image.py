@@ -15,7 +15,7 @@ def crop_rectangle_from_image(image: np.ndarray, corners: np.ndarray) -> np.ndar
     """
     rect = cv2.minAreaRect(np.array(corners[:, ::-1], dtype=np.float32))
     center, size, theta = rect
-    center, size = tuple(center), tuple(np.int0(size))
+    center, size = tuple(center), tuple(np.int64(size))
 
     M = cv2.getRotationMatrix2D(center, theta, 1)
     dest = cv2.warpAffine(image, M, tuple((np.array(image.shape[:2]) * 2).astype(np.int64)))
