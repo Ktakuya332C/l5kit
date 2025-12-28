@@ -1,3 +1,4 @@
+import math
 from typing import Dict, List, Tuple
 
 import numpy as np
@@ -270,7 +271,7 @@ class SafePathNetModel(nn.Module):
                 agents_xy /= self.xy_scale
             targets = torch.cat((agents_xy, agents_yaw), dim=-1)
             targets[..., :2] /= 125.
-            targets[..., 2] /= np.math.pi  # no need for complex angle normalization, we predict offsets
+            targets[..., 2] /= math.pi  # no need for complex angle normalization, we predict offsets
 
             # [batch_size, num_agents, num_timesteps]
             target_avails = data_batch["all_other_agents_future_availability"]
@@ -327,7 +328,7 @@ class SafePathNetModel(nn.Module):
             # agents
             # [batch_size, num_agents, num_trajectories, num_timesteps, 3]
             pred_agents[..., :2] *= 125.
-            pred_agents[..., 2] *= np.math.pi  # no need for complex angle normalization, we predict offsets
+            pred_agents[..., 2] *= math.pi  # no need for complex angle normalization, we predict offsets
 
             # getting the agents availabilities at the current timestep
             # [batch_size, num_agents]
