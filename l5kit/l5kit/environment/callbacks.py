@@ -2,7 +2,7 @@ import csv
 import math
 from typing import Dict, List, Optional, Tuple
 
-import gym
+import gymnasium as gym
 from stable_baselines3.common.callbacks import EvalCallback
 
 from l5kit.cle.composite_metrics import CompositeMetricAggregator

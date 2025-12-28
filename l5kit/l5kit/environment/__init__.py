@@ -1,4 +1,4 @@
-import gym
+import gymnasium as gym
 
 
 # Register L5 Env
