@@ -59,8 +59,8 @@ def export_zarr_to_csv(
 
     for el in tqdm(dataset, desc="extracting GT"):  # type: ignore
         # convert agent coordinates to world offsets
-        offsets = transform_points(el["target_positions"], el["world_from_agent"]) - el["centroid"][:2]
-        future_coords_offsets.append(offsets)
+        # offsets = transform_points(el["target_positions"], el["world_from_agent"]) - el["centroid"][:2]
+        future_coords_offsets.append(el["target_positions"])
 
         timestamps.append(el["timestamp"])
         agent_ids.append(el["track_id"])

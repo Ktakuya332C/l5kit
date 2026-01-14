@@ -51,7 +51,7 @@ class AgentDataset(EgoDataset):
         self.agents_indices = np.nonzero(agents_mask)[0]
 
         # store an array where valid indices have increasing numbers and the rest is -1 (N_total_agents,)
-        self.mask_indices = agents_mask.copy().astype(np.int)
+        self.mask_indices = agents_mask.copy().astype(np.int64)
         self.mask_indices[self.mask_indices == 0] = -1
         self.mask_indices[self.mask_indices == 1] = np.arange(0, np.sum(agents_mask))
 

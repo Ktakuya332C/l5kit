@@ -33,10 +33,10 @@ def test_get_scene_dataset(dmg: LocalDataManager, tmp_path: Path, zarr_dataset: 
     # all scenes should be the same as the input one
     for scene_idx in range(concat_count):
         zarr_scene = zarr_cat_dataset.get_scene_dataset(scene_idx)
-        assert np.alltrue(zarr_scene.scenes == np.asarray(zarr_dataset.scenes))
-        assert np.alltrue(zarr_scene.frames == np.asarray(zarr_dataset.frames))
-        assert np.alltrue(zarr_scene.agents == np.asarray(zarr_dataset.agents))
-        assert np.alltrue(zarr_scene.tl_faces == np.asarray(zarr_dataset.tl_faces))
+        assert np.all(zarr_scene.scenes == np.asarray(zarr_dataset.scenes))
+        assert np.all(zarr_scene.frames == np.asarray(zarr_dataset.frames))
+        assert np.all(zarr_scene.agents == np.asarray(zarr_dataset.agents))
+        assert np.all(zarr_scene.tl_faces == np.asarray(zarr_dataset.tl_faces))
 
     with pytest.raises(ValueError):
         zarr_cat_dataset.get_scene_dataset(concat_count + 1)

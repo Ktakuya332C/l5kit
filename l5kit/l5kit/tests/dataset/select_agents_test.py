@@ -47,7 +47,7 @@ def test_get_valid_agents_annot_hole(dataset: ChunkedDataset) -> None:
     dataset.agents[10]["track_id"] = 2
 
     agents_mask, *_ = get_valid_agents_p(frames_range, dataset)
-    agents_mask = agents_mask.astype(np.int)
+    agents_mask = agents_mask.astype(np.int64)
 
     # 9 should have no future and 11 no past
     assert agents_mask[9, 1] == 0
@@ -69,7 +69,7 @@ def test_get_valid_agents_multi_annot_hole(dataset: ChunkedDataset) -> None:
     dataset.agents[25]["track_id"] = 2
 
     agents_mask, *_ = get_valid_agents_p(frames_range, dataset)
-    agents_mask = agents_mask.astype(np.int)
+    agents_mask = agents_mask.astype(np.int64)
 
     assert np.all(np.diff(agents_mask[:10, 0]) == 1)
     assert np.all(np.diff(agents_mask[:10, 1]) == -1)
@@ -86,7 +86,7 @@ def test_get_valid_agents_extent_change(dataset: ChunkedDataset) -> None:
     dataset.agents[10]["extent"] *= 2
 
     agents_mask, *_ = get_valid_agents_p(frames_range, dataset)
-    agents_mask = agents_mask.astype(np.int)
+    agents_mask = agents_mask.astype(np.int64)
 
     assert np.all(np.diff(agents_mask[:10, 0]) == 1)
     assert np.all(np.diff(agents_mask[:10, 1]) == -1)
@@ -100,7 +100,7 @@ def test_get_valid_agents_yaw_change(dataset: ChunkedDataset) -> None:
     dataset.agents[20]["yaw"] = np.radians(29)  # under yaw threshold
 
     agents_mask, *_ = get_valid_agents_p(frames_range, dataset)
-    agents_mask = agents_mask.astype(np.int)
+    agents_mask = agents_mask.astype(np.int64)
 
     assert np.all(np.diff(agents_mask[:10, 0]) == 1)
     assert np.all(np.diff(agents_mask[:10, 1]) == -1)
@@ -114,7 +114,7 @@ def test_get_valid_agents_yaw_change(dataset: ChunkedDataset) -> None:
 def test_get_valid_agents(dataset: ChunkedDataset) -> None:
     frames_range = np.asarray([0, len(dataset.frames)])
     agents_mask, *_ = get_valid_agents_p(frames_range, dataset)
-    agents_mask = agents_mask.astype(np.int)
+    agents_mask = agents_mask.astype(np.int64)
 
     # we have a single valid agents, so the mask should decrease gently in the future and increase in the past
     assert np.all(np.diff(agents_mask[:, 0]) == 1)

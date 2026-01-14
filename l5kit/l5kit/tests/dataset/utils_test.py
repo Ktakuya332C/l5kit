@@ -32,7 +32,7 @@ def test_move_to_numpy() -> None:
         assert isinstance(in_dict[k], torch.Tensor)
 
     out_dict = move_to_numpy(in_dict)
-    assert np.alltrue(list(in_dict.keys()) == list(out_dict.keys()))
+    assert np.all(list(in_dict.keys()) == list(out_dict.keys()))
     for k in out_dict:
         assert isinstance(out_dict[k], np.ndarray)
 
@@ -44,7 +44,7 @@ def test_move_to_device_trivial() -> None:
         assert in_dict[k].device == torch.device("cpu")
 
     out_dict = move_to_device(in_dict, torch.device("cpu"))
-    assert np.alltrue(list(in_dict.keys()) == list(out_dict.keys()))
+    assert np.all(list(in_dict.keys()) == list(out_dict.keys()))
     for k in out_dict:
         assert isinstance(out_dict[k], torch.Tensor)
         assert out_dict[k].device == torch.device("cpu")

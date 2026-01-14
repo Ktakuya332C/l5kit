@@ -71,7 +71,7 @@ def draw_trajectory(
     else:
         for pos in positions:
             pred_waypoint = pos[:2]
-            cv2.circle(on_image, tuple(pred_waypoint.astype(np.int)), radius, rgb_color, -1)
+            cv2.circle(on_image, tuple(pred_waypoint.astype(np.int64)), radius, rgb_color, -1)
 
 
 def draw_reference_trajectory(on_image: np.ndarray, world_to_pixel: np.ndarray, positions: np.ndarray) -> None:

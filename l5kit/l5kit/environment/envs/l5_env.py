@@ -3,11 +3,11 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Any, DefaultDict, Dict, List, NamedTuple, Optional
 
-import gym
+import gymnasium as gym
 import numpy as np
 import torch
-from gym import spaces
-from gym.utils import seeding
+from gymnasium import spaces
+from gymnasium.utils import seeding
 from torch.utils.data.dataloader import default_collate
 
 from l5kit.configs import load_config_data
